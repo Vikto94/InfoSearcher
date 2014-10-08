@@ -1,0 +1,9 @@
+package indexer;
+
+public interface Index {
+	
+	
+	public Index (long index);	
+	
+	public String indexToPath (long index);
+}

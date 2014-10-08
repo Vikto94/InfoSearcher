@@ -1,0 +1,43 @@
+/**
+ * 
+ */
+package searcher;
+
+import java.io.File;
+import java.util.*;
+
+import indexer.*;
+
+/**
+ * @author Viktor
+ *
+ */
+public class Search {
+	private final String path;
+	private final File folder;
+	
+	public Search (long index){
+		path = Index.indexToPath(index);
+		System.out.print("path to search folder: " + path);
+		folder = new File (path);
+	}
+	
+	public void run (){
+		String query = "";
+		Scanner sc= new Scanner(System.in);
+		while (!query.equalsIgnoreCase("exit")){
+			query = sc.nextLine();
+			System.out.print(runQuery(query));
+		}
+		sc.close();
+	}
+	
+	private String runQuery (String query){
+		String res = "";
+		String[] fileList = folder.list();
+		for (File file : fileList){
+			
+		}
+		return res;
+	}
+}

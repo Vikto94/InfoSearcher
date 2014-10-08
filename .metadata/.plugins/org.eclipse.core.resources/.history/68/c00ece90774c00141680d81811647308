@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package searcher;
+
+/**
+ * @author Viktor
+ *
+ */
+public class Search {
+	private String final path;
+}

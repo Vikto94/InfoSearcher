@@ -1,0 +1,10 @@
+package indexer;
+
+public interface Index {
+	public Index (long index){
+		this.index = index;
+		path = indexToPath (index);
+	}	
+	
+	public String indexToPath (long index);
+}

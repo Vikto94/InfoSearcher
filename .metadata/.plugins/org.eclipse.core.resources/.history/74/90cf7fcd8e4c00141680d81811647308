@@ -1,0 +1,11 @@
+package searcher;
+
+import java.io.FileReader;
+
+public class TokenSearcher {
+	private final FileReader file;
+	
+	TokenSearcher (String fileName){
+		file = new FileReader(fileName);
+	}
+}

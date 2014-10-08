@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+package searcher;
+
+import indexer.Index;
+
+/**
+ * @author Viktor
+ *
+ */
+public class Search {
+	private final String path;
+	
+	Search (long index){
+		path = Index.class.indexToPath(index);
+	}
+}

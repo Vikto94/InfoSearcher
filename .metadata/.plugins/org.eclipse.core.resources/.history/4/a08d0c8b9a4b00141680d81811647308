@@ -1,0 +1,28 @@
+/**
+ * 
+ */
+package indexer;
+
+/**
+ * @author Viktor
+ *
+ */
+public class Index {
+	private final long index;
+	private final String path;
+	
+	public Index (final long index){
+		this.index = index;
+		path = pathToIndex ()
+	}
+	
+	private long pathToIndex (final String path){
+		long index = 0;
+		return index;
+	}
+	
+	private String indexToPath (final long index){
+		String path = "";
+		return path;
+	}	
+}

@@ -1,0 +1,55 @@
+/**
+ * 
+ */
+package searcher;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+
+import indexer.*;
+
+/**
+ * @author Viktor
+ *
+ */
+public class Search {
+	private final String path;
+	private final File folder;
+	
+	public Search (long index){
+		path = Index.indexToPath(index);
+		System.out.print("path to search folder: " + path);
+		folder = new File (path);
+	}
+	
+	public void run (){
+		String query = "";
+		Scanner sc= new Scanner(System.in);
+		while (!query.equalsIgnoreCase("exit")){
+			query = sc.nextLine();
+			System.out.print(runQuery(query));
+		}
+		sc.close();
+	}
+	
+	private String runQuery (String query){
+		String res = "";
+		String[] fileList = folder.list();
+		for (String fileName : fileList){
+			try {
+				TokenSearcher tokenSearcher = new TokenSearcher (path + "\\" + fileName);
+				String[] gueryArr = query.split("\\s");
+				if (gueryArr.length > 1)
+				if (tokenSearcher.isFind(query)){
+					res = res.concat(fileName).concat(" ");
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (res.equals("")) res = "no documents found";
+		return res;
+	}
+}

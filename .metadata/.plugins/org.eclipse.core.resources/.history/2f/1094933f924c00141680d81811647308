@@ -1,0 +1,16 @@
+package searcher;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+public class TokenSearcher {
+	private final FileReader file;
+	
+	TokenSearcher (String fileName) throws FileNotFoundException{
+		file = new FileReader(fileName);
+	}
+	
+	public boolean isFind (String token){
+		return false;
+	}
+}

@@ -1,0 +1,9 @@
+package searcher;
+
+public class TokenSearcher {
+	FileReader final file;
+	
+	TokenSearcher (String fileName){
+		file = new FileReader(fileName);
+	}
+}

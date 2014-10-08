@@ -1,0 +1,13 @@
+/**
+ * 
+ */
+package indexer;
+
+/**
+ * @author Viktor
+ *
+ */
+public class Index {
+	private final long index;
+	private final String path;
+}

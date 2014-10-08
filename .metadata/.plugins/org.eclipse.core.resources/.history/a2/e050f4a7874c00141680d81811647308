@@ -1,0 +1,31 @@
+/**
+ * 
+ */
+package searcher;
+
+import java.util.*;
+
+import indexer.*;
+
+/**
+ * @author Viktor
+ *
+ */
+public class Search {
+	private final String path;
+	
+	public Search (long index){
+		path = Index.indexToPath(index);
+		System.out.print("path to search folder: " + path);
+	}
+	
+	public void run (){
+		String query = "";
+		Scanner sc= new Scanner(System.in);
+		while (!query.equalsIgnoreCase("exit")){
+			query = sc.nextLine();
+			System.out.print("res: "query);
+		}
+		sc.close();
+	}
+}

@@ -1,0 +1,126 @@
+/**
+ * 
+ */
+package indexer;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Objects;
+
+import org.sqlite.*;
+
+/**
+ * @author Viktor
+ *
+ */
+
+
+public class Index {
+	private final long index;
+	private final String path;
+	private final int numOfDifferentSymbols = 128;
+	private final Integer maxPathLen = new Integer(200);
+	
+	public Index (long index){
+		this.index = index;
+		path = indexToPath (index);
+	}
+	
+	public Index (String path){
+		this.path = path;
+		index = pathToIndex (path);
+	}	
+	
+	public long getIndex (){
+		return index;
+	}
+	
+	public String getPath (){
+		return path;
+	}
+	
+	private long pathToIndex (String path){
+		long index = 0;
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+		try {
+			Connection bd = DriverManager.getConnection("jdbc:sqlite:sqlite.db_ip");
+			Statement st = bd.createStatement();
+			//st.executeUpdate ("drop table pathIndexes");
+			String query = "create table if not exists pathIndexes"
+					.concat("(index INTEGER PRIMARY KEY AUTOINCREMENT, path VARCHAR(")
+					.concat(Objects.toString(maxPathLen))
+					.concat("));");
+			int result = st.executeUpdate (query);
+			query = "select 'index' from pathIndexes where path LIKE '"
+					.concat(path)
+					.concat("'");
+			ResultSet rs = st.executeQuery(query);
+			if (rs.next()){
+				index = rs.getLong(1);
+				return index;
+			}
+			else
+			{
+				query = "insert into pathIndexes (path) values ( '"
+						.concat(path)
+						.concat("');");
+				st.executeUpdate (query);
+				query = "select 'index' from pathIndexes where path LIKE '"
+						.concat(path)
+						.concat("';");
+				ResultSet rs1 = st.executeQuery(query);
+				if (rs1.next()){
+					System.out.print(rs1.getLong(1));
+					index = rs1.getLong("index");
+					return index;
+				}
+				else return -1;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	private String indexToPath (long index){
+		String path = "";
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		try {
+			Connection bd = DriverManager.getConnection("jdbc:sqlite:sqlite.db_ip");
+			Statement st = bd.createStatement();
+			String query = "select 'path' from 'pathIndixes' where 'index' LIKE '"
+					.concat(Objects.toString(new Long (index)))
+					.concat("';");
+			ResultSet rs = st.executeQuery(query);
+			if (rs.next()){
+				path = rs.getString(1);
+				return path;
+			}
+			else return null;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}	
+	
+	
+}

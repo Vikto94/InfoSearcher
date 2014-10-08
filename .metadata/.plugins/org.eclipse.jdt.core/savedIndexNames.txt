@@ -1,0 +1,8 @@
+INDEX VERSION 1.126+C:\Projects\InfoSearcher\.metadata\.plugins\org.eclipse.jdt.core
+2799025667.index
+818805201.index
+3802332609.index
+1942507481.index
+3649188006.index
+1153388736.index
+1312357515.index

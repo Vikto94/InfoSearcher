@@ -1,0 +1,80 @@
+/**
+ * 
+ */
+package indexer;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Objects;
+
+import org.sqlite.*;
+
+/**
+ * @author Viktor
+ *
+ */
+
+
+public class Index {
+	private final long index;
+	private final String path;
+	private final int numOfDifferentSymbols = 128;
+	private final int maxPathLen = 200;
+	
+	public Index (long index){
+		this.index = index;
+		path = indexToPath (index);
+	}
+	
+	public Index (String path){
+		this.path = path;
+		index = pathToIndex (path);
+	}	
+	
+	public long getIndex (){
+		return index;
+	}
+	
+	public String getPath (){
+		return path;
+	}
+	
+	private long pathToIndex (String path){
+		long index = 0;
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+		try {
+			Connection bd = DriverManager.getConnection("jdbc:sqlite:sqlite.db_ip");
+			Statement st = bd.createStatement();
+			String query = "create table if not exists 'path'"
+					.concat("('index' SERIAL PRIMARY KEY, 'path' VARCHAR(")
+					.concat(Objects.toString(maxPathLen))
+					.concat("));");
+			st.execute(query);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+
+		return index;
+	}
+	
+	private String indexToPath (long index){
+		String path = "";
+		while (index > 0){
+			Integer symbol = new Integer((int) (index % numOfDifferentSymbols));
+			path.concat(Objects.toString(symbol));
+			index = index / numOfDifferentSymbols;
+		}
+		return path;
+	}	
+}

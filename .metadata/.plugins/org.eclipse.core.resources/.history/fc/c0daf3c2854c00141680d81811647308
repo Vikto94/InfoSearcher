@@ -1,0 +1,23 @@
+/**
+ * 
+ */
+package searcher;
+
+import indexer.*;
+
+/**
+ * @author Viktor
+ *
+ */
+public class Search {
+	private final String path;
+	
+	public Search (long index){
+		path = Index.indexToPath(index);
+		System.out.print("path to search folder: " + path);
+	}
+	
+	public void run (){
+		
+	}
+}

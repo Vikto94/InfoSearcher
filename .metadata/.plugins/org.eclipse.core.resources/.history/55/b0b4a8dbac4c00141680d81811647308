@@ -1,0 +1,40 @@
+package searcher;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import org.apache.lucene.morphology.LuceneMorphology;
+
+
+
+public class TokenSearcher {
+	private final List<String> morphemeInFile = new ArrayList<String>();
+	
+	TokenSearcher (String fileName) throws FileNotFoundException{
+		Scanner in = new Scanner(new File(fileName));
+		String word = "";
+		String tag = "";
+		List<String> result = new ArrayList<String>();
+		LuceneMorphology luceneMorphology = new LuceneMorphology();
+		while (in.hasNext()) {
+			word = in.next();
+			tag = word;
+			result = morphology.getMorphInfo(word);
+			for (String morpheme : result){
+				System.out.print(" : " + morpheme);
+			}
+			morphemeInFile.add(word);
+		}
+		for (String morpheme : morphemeInFile){
+			System.out.print("\nw: " + morpheme);
+		}
+	}
+	
+	public boolean isFind (String token){
+		return false;
+	}
+}

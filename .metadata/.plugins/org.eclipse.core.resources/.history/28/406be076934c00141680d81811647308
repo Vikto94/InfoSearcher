@@ -1,0 +1,24 @@
+package searcher;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+
+public class TokenSearcher {
+//	private final String[] morphemeInFile;
+	
+	TokenSearcher (String fileName) throws FileNotFoundException{
+		Scanner in = new Scanner(new File(fileName));
+		String word = "";
+//		String 
+		while (in.hasNext()) {
+			word = in.next();
+			System.out.print("\nw: " + word);
+		}
+//		morphemeInFile = 
+	}
+	
+	public boolean isFind (String token){
+		return false;
+	}
+}
